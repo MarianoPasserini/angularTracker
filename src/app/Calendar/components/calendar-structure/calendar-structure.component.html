@@ -1,8 +1,8 @@
 <div class="container">
   <div class="header-year">
-    <span class="arrow-left"><</span>
+    <span class="arrow left" (click)="changeYear(-1)"><</span>
     <h1>{{actualYear}}</h1>
-    <span class="arrow-right">></span>
+    <span class="arrow right" (click)="changeYear(1)">></span>
   </div>
 
 
@@ -24,7 +24,7 @@
         <li *ngFor="let daysName of daysOnTheWeek">
           {{ daysName }}
         </li>
-        <li class="days-list" *ngFor="let days of monthClicked[0].daysOfMonth; let isFirst = first" [ngStyle]="{'grid-column-start': isFirst ? monthClicked[0].startsOn : 0}">
+        <li class="days-list" *ngFor="let days of monthClicked[0].daysOfMonth; let i = index; let isFirst = first" [ngStyle]="{'grid-column-start': isFirst ? monthClicked[0].startsOn : 0}">
           {{ days }}
         </li>
       </ul>
@@ -32,5 +32,4 @@
     </div>
   </ng-template>
   </span>
-  <button (click)="testing()">TEST ONLY</button>
 </div>

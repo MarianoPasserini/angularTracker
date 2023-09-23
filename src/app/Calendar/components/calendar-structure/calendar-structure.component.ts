@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Calendar } from '../../interfaces/calendar.interface';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'calendar-structure',
@@ -26,9 +27,6 @@ export class CalendarStructureComponent {
       }
     });
   }
-  testing(){
-    console.log(this.getCalendar)
-  }
   changeFlag() {
     this.flag = !this.flag;
   }
@@ -39,6 +37,15 @@ export class CalendarStructureComponent {
       month.status = false;
     });
     this.changeFlag();
-    console.log("LOGGEANDO EL ARRAY DE MESES: ", this.monthClicked);
+  }
+  @Output()
+  public changedYear: EventEmitter<number> = new EventEmitter();
+  updateCalendar(value: number){
+    this.changedYear.emit(value);
+  }
+
+  changeYear(value: number) {
+    this.actualYear += value;
+    this.updateCalendar(this.actualYear);
   }
 }

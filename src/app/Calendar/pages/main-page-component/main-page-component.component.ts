@@ -8,9 +8,14 @@ import { CalendarService } from '../../services/calendar.service';
 export class MainPageComponentComponent {
   constructor(private calendarService: CalendarService) { }
 
-  public getCalendar = this.calendarService.getCalendar;
+  public getCalendar = this.calendarService.generateCalendar(this.calendarService.actualYear);
 
   public consoleDays(): void {
     console.log(this.getCalendar[0].daysOfMonth);
   }
+
+  public updateCalendar(value: number): void {
+    this.getCalendar = this.calendarService.generateCalendar(value);
+  }
+
 }

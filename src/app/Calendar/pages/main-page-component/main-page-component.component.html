@@ -1,2 +1,2 @@
 <!-- <calendar-day-month></calendar-day-month> -->
-<calendar-structure [getCalendar]="getCalendar"></calendar-structure>
+<calendar-structure [getCalendar]="getCalendar" (changedYear)="updateCalendar($event)"></calendar-structure>

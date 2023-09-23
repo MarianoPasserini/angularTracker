@@ -66,6 +66,13 @@ ul{
   align-items: center;
   justify-content: center;
 }
+.arrow{
+  cursor: pointer;
+  color: white;
+  font-size: 30px;
+  margin: 0 10px;
+
+}
 
 .month-expanded{
   display: grid;
