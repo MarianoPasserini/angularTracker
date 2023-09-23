@@ -18,9 +18,9 @@
   </ng-template>
 
   <ng-template [ngSwitchCase]="true">
-    <div class="calendar-container" *ngFor="let item of monthClicked">
+    <div class="calendar-container-expanded" *ngFor="let item of monthClicked">
       <h1>{{item.monthKey}}</h1>
-      <ul>
+      <ul class="month-expanded">
         <li *ngFor="let daysName of daysOnTheWeek">
           {{ daysName }}
         </li>
@@ -28,7 +28,7 @@
           {{ days }}
         </li>
       </ul>
-      <button (click)="changeFlag()" (click)="resetView()" >X</button>
+      <button (click)="resetView()" >X</button>
     </div>
   </ng-template>
   </span>

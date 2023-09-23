@@ -30,18 +30,19 @@ export class CalendarStructureComponent {
 
   changeFlag() {
     this.flag = !this.flag;
-    console.log("LOGGEANDO LA FLAG: ", this.flag);
   }
 
   returnMonthClicked(): void{
     this.monthClicked = this.getCalendar.filter((month) => month.status == true);
+    console.log("LOGGEANDO EL ARRAY DE MESES: ", this.monthClicked)
   }
 
   resetView(): void {
     if (this.tracker >= 0 && this.tracker < this.getCalendar.length) {
       this.getCalendar[this.tracker].status = false;
     }
-    this.monthClicked = [];
+    this.monthClicked.splice(0, this.monthClicked.length);
+    console.log("LOGGEANDO EL ARRAY DE MESES: ", this.monthClicked);
     this.changeFlag();
   }
 }

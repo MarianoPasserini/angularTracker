@@ -29,9 +29,10 @@
     justify-content: center;
     margin: 3px 3px;
 }
-
-.calendar-container{
+ul{
   list-style: none;
+}
+.calendar-container{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border: 1px dashed #444;
@@ -53,13 +54,15 @@
   }
 }
 
-.month-item-active{
-    border: 3px solid #585757;
-    background-color: red;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    margin: 3px 3px;
+
+
+.calendar-container-expanded{
+  border: 1px dashed #444;
+  height:70%;
+  padding:0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
