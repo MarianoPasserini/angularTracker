@@ -1,6 +1,7 @@
 import { Component, Input, Output } from '@angular/core';
 import { Calendar } from '../../interfaces/calendar.interface';
 import { EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs'; // Import Subscription
 
 @Component({
   selector: 'calendar-structure',
@@ -10,23 +11,31 @@ import { EventEmitter } from '@angular/core';
 export class CalendarStructureComponent {
 
   @Input()
-  public getCalendar: Calendar[] = []; //Get the input from the service
-  public actualYear: number = new Date().getFullYear(); // Get the actual year
-  public flag: boolean = false; // Flag to check if the month is expanded
-  public monthClicked: Calendar[] = []; // Array to store the month clicked
-  public daysOnTheWeek: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // Array to store the days of the week
+  public getCalendar: Calendar[] = [];
+  public actualYear: number = new Date().getFullYear();
+  public flag: boolean = false;
+  public monthClicked: Calendar[] = [];
+  public daysOnTheWeek: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  private yearChangeSubscription: Subscription; // Create a Subscription
+
+  constructor() {
+    this.yearChangeSubscription = this.changedYear.subscribe((value: number) => {
+      this.actualYear = value;
+      this.updateMonthClicked(); // Update the monthClicked array when the year changes
+    });
+  }
 
   expandMonth(index: number) {
     this.getCalendar.forEach((month, i) => {
       if (i == index) {
         month.status = true;
-        console.log("LOGGEANDO EL MONTH: ", month.status);
-        console.log( "LOGGEANDO EL INDEX: ", index)
         this.monthClicked.push(month);
         this.changeFlag();
       }
     });
   }
+
   changeFlag() {
     this.flag = !this.flag;
   }
@@ -38,14 +47,28 @@ export class CalendarStructureComponent {
     });
     this.changeFlag();
   }
+
   @Output()
   public changedYear: EventEmitter<number> = new EventEmitter();
-  updateCalendar(value: number){
+
+  updateCalendar(value: number) {
     this.changedYear.emit(value);
   }
 
   changeYear(value: number) {
     this.actualYear += value;
     this.updateCalendar(this.actualYear);
+  }
+
+  updateMonthClicked() {
+    if (this.monthClicked.length > 0) {
+      const selectedMonthKey = this.monthClicked[0].monthKey;
+      this.monthClicked = this.getCalendar.filter((month) => month.monthKey === selectedMonthKey);
+      this.monthClicked[0].startsOn -= 1;
+    }
+  }
+
+  ngOnDestroy() {
+    this.yearChangeSubscription.unsubscribe(); // Unsubscribe to prevent memory leaks
   }
 }
