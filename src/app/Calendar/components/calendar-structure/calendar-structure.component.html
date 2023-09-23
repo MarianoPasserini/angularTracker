@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="header-year">
+    <span class="arrow-left"><</span>
+    <h1>{{actualYear}}</h1>
+    <span class="arrow-right">></span>
+  </div>
+
+
+  <span [ngSwitch]="flag">
+
+  <ng-template [ngSwitchCase]="false">
+    <ul class="calendar-container">
+      <li *ngFor="let month of getCalendar; let i = index" class="month-item"
+      (click)="expandMonth(i)">
+        {{ month.monthKey }}
+      </li>
+    </ul>
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="true">
+    <div class="calendar-container" *ngFor="let item of monthClicked">
+      <h1>{{item.monthKey}}</h1>
+      <ul>
+        <li *ngFor="let daysName of daysOnTheWeek">
+          {{ daysName }}
+        </li>
+        <li class="days-list" *ngFor="let days of item.daysOfMonth" [ngStyle]="{ 'grid-column-start': item.startsOn }">
+          {{ days }}
+        </li>
+      </ul>
+      <button (click)="changeFlag()" (click)="resetView()" >X</button>
+    </div>
+  </ng-template>
+  </span>
+</div>
