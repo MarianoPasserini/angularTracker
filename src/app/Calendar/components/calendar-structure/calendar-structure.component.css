@@ -57,7 +57,7 @@ ul{
 
 
 .calendar-container-expanded{
-  border: 1px dashed #444;
+  border: 1px dashed white;
   height:70%;
   padding:0;
   width: 100%;
@@ -65,4 +65,25 @@ ul{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.month-expanded{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.days-list{
+    border-radius: 50%; /* Optional: Makes the circle smoother */
+    cursor: pointer;
+    color: #fff;
+}
+
+.month-expanded li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #333333;
+  border: 1px solid #585757;
+  margin: 8px 8px;
 }

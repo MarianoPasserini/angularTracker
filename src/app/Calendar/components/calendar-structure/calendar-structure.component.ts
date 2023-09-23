@@ -14,35 +14,31 @@ export class CalendarStructureComponent {
   public flag: boolean = false; // Flag to check if the month is expanded
   public monthClicked: Calendar[] = []; // Array to store the month clicked
   public daysOnTheWeek: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // Array to store the days of the week
-  public tracker: number = -1; // Tracker to check the number of months expanded
 
   expandMonth(index: number) {
     this.getCalendar.forEach((month, i) => {
       if (i == index) {
         month.status = true;
         console.log("LOGGEANDO EL MONTH: ", month.status);
-        this.tracker = index;
-        this.returnMonthClicked();
+        console.log( "LOGGEANDO EL INDEX: ", index)
+        this.monthClicked.push(month);
         this.changeFlag();
       }
     });
   }
-
+  testing(){
+    console.log(this.getCalendar)
+  }
   changeFlag() {
     this.flag = !this.flag;
   }
 
-  returnMonthClicked(): void{
-    this.monthClicked = this.getCalendar.filter((month) => month.status == true);
-    console.log("LOGGEANDO EL ARRAY DE MESES: ", this.monthClicked)
-  }
-
   resetView(): void {
-    if (this.tracker >= 0 && this.tracker < this.getCalendar.length) {
-      this.getCalendar[this.tracker].status = false;
-    }
-    this.monthClicked.splice(0, this.monthClicked.length);
-    console.log("LOGGEANDO EL ARRAY DE MESES: ", this.monthClicked);
+    this.monthClicked = [];
+    this.getCalendar.forEach((month) => {
+      month.status = false;
+    });
     this.changeFlag();
+    console.log("LOGGEANDO EL ARRAY DE MESES: ", this.monthClicked);
   }
 }

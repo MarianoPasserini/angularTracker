@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Calendar} from '../interfaces/calendar.interface';
+import { Calendar } from '../interfaces/calendar.interface';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CalendarService {
   public months: number[] = [...Array(12).keys()];
   public actualYear: number = new Date().getFullYear();
@@ -15,10 +15,11 @@ export class CalendarService {
     const calendar: Calendar = {
       monthKey: new Date(this.actualYear, month, 1).toLocaleString('default', { month: 'long' }),
       daysOfMonth: daysOfMonth,
-      startsOn: new Date(this.actualYear, month, 1).getDay()
+      startsOn: new Date(this.actualYear, month, 1).getDay() + 1,
+      status: false, // Initialize status to false for all months
     };
     return calendar;
   });
-  constructor() { }
 
+  constructor() {}
 }

@@ -18,13 +18,13 @@
   </ng-template>
 
   <ng-template [ngSwitchCase]="true">
-    <div class="calendar-container-expanded" *ngFor="let item of monthClicked">
-      <h1>{{item.monthKey}}</h1>
+    <div class="calendar-container-expanded">
+      <h1>{{monthClicked[0].monthKey}}</h1>
       <ul class="month-expanded">
         <li *ngFor="let daysName of daysOnTheWeek">
           {{ daysName }}
         </li>
-        <li class="days-list" *ngFor="let days of item.daysOfMonth" [ngStyle]="{ 'grid-column-start': item.startsOn }">
+        <li class="days-list" *ngFor="let days of monthClicked[0].daysOfMonth; let isFirst = first" [ngStyle]="{'grid-column-start': isFirst ? monthClicked[0].startsOn : 0}">
           {{ days }}
         </li>
       </ul>
@@ -32,4 +32,5 @@
     </div>
   </ng-template>
   </span>
+  <button (click)="testing()">TEST ONLY</button>
 </div>
